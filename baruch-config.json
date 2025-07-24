@@ -72,7 +72,7 @@
     }
   },
   "settings": {
-    "defaultExcelFile": "Baruch_Workout.xlsx",
+    "defaultExcelFile": "public/Baruch_Workout.xlsx",
     "allowCustomPercentages": true,
     "showProbabilities": true,
     "showRandomValues": true

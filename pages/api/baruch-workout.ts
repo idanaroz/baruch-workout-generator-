@@ -187,8 +187,10 @@ function parseBaruchExcel(): BaruchData {
   // Try multiple paths to handle both local and production environments
   const possiblePaths = [
     path.join(process.cwd(), config.settings.defaultExcelFile),
+    path.join(process.cwd(), 'public', 'Baruch_Workout.xlsx'),
     path.join(__dirname, '../../..', config.settings.defaultExcelFile),
     path.join(__dirname, '../../../..', config.settings.defaultExcelFile),
+    path.join(__dirname, '../../..', 'public', 'Baruch_Workout.xlsx'),
     config.settings.defaultExcelFile
   ]
 
