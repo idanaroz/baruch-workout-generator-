@@ -136,7 +136,10 @@ const BaruchWorkoutGenerator: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🔥 Baruch Workout Generator</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          <span className="inline-block w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mr-3 text-center leading-10 text-white font-bold text-xl">B</span>
+          Baruch Workout Generator
+        </h1>
           <p className="text-lg text-gray-600">Dynamic CrossFit-style workouts with weighted random selection</p>
           <div className="mt-4">
             <a
@@ -173,7 +176,10 @@ const BaruchWorkoutGenerator: React.FC = () => {
           <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
-                💪 {workout.day}'s Workout
+                <span className="inline-flex items-center">
+                <span className="inline-block w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md mr-2 text-center leading-6 text-white font-bold text-sm">W</span>
+                {workout.day}'s Workout
+              </span>
               </h2>
               <button
                 onClick={regenerateWorkout}
@@ -195,7 +201,12 @@ const BaruchWorkoutGenerator: React.FC = () => {
 
             {/* Warmup */}
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">🔥 Warmup</h3>
+                              <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                  <span className="inline-flex items-center">
+                    <span className="inline-block w-5 h-5 bg-gradient-to-br from-yellow-500 to-orange-500 rounded mr-2 text-center leading-5 text-white font-bold text-xs">W</span>
+                    Warmup
+                  </span>
+                </h3>
               <p className="text-gray-600 bg-yellow-50 p-3 rounded-lg">{workout.warmup}</p>
             </div>
 
@@ -208,8 +219,8 @@ const BaruchWorkoutGenerator: React.FC = () => {
                     <div key={index} className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
                       <div className="flex justify-between items-center">
                         <div>
-                          <span className="text-2xl font-bold text-indigo-600">
-                            {index + 1}️⃣
+                          <span className="inline-flex items-center justify-center w-8 h-8 text-sm font-bold text-white bg-indigo-600 rounded-full mr-1">
+                            {index + 1}
                           </span>
                           <span className="text-lg font-semibold text-gray-800 ml-2">
                             {exercise.name}
