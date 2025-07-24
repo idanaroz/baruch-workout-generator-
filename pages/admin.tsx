@@ -253,17 +253,20 @@ const AdminPanel: React.FC = () => {
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
               {[
-                { id: 'templates', label: '📅 Daily Templates', desc: 'Configure workout days' },
-                { id: 'metcons', label: '⚡ MetCons', desc: 'Manage CrossFit workouts' },
-                { id: 'settings', label: '⚙️ Settings', desc: 'General settings' }
+                { id: 'templates', label: '📅 Daily Templates', desc: 'Configure workout days', disabled: false },
+                { id: 'metcons', label: '⚡ MetCons', desc: 'Manage CrossFit workouts', disabled: false },
+                { id: 'settings', label: '⚙️ Settings', desc: 'General settings (Coming Soon)', disabled: true }
               ].map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
+                  onClick={() => !tab.disabled && setActiveTab(tab.id as any)}
+                  disabled={tab.disabled}
                   className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === tab.id
-                      ? 'border-indigo-500 text-indigo-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    tab.disabled
+                      ? 'border-transparent text-gray-300 cursor-not-allowed opacity-50'
+                      : activeTab === tab.id
+                        ? 'border-indigo-500 text-indigo-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
                   <div>
@@ -454,72 +457,16 @@ const AdminPanel: React.FC = () => {
           </div>
         )}
 
-        {/* Settings Tab */}
-        {activeTab === 'settings' && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-800">General Settings</h2>
+        {/* Settings Tab - DISABLED FOR NOW
+            The Settings section has been temporarily disabled.
+            It would allow configuring:
+            - Default Excel file path
+            - Toggle custom percentages
+            - Show/hide probability values
+            - Show/hide random selection values
 
-            <div className="bg-white p-6 rounded-lg shadow border">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Default Excel File
-                  </label>
-                  <input
-                    type="text"
-                    value={config.settings.defaultExcelFile}
-                    onChange={(e) => setConfig({
-                      ...config,
-                      settings: { ...config.settings, defaultExcelFile: e.target.value }
-                    })}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={config.settings.allowCustomPercentages}
-                      onChange={(e) => setConfig({
-                        ...config,
-                        settings: { ...config.settings, allowCustomPercentages: e.target.checked }
-                      })}
-                      className="mr-2"
-                    />
-                    Allow Custom Percentages
-                  </label>
-
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={config.settings.showProbabilities}
-                      onChange={(e) => setConfig({
-                        ...config,
-                        settings: { ...config.settings, showProbabilities: e.target.checked }
-                      })}
-                      className="mr-2"
-                    />
-                    Show Probabilities
-                  </label>
-
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={config.settings.showRandomValues}
-                      onChange={(e) => setConfig({
-                        ...config,
-                        settings: { ...config.settings, showRandomValues: e.target.checked }
-                      })}
-                      className="mr-2"
-                    />
-                    Show Random Values
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+            This can be re-enabled later if needed.
+        */}
 
         {/* Save Button */}
         <div className="mt-8 flex justify-center">
