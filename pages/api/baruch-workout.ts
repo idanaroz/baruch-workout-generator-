@@ -186,11 +186,16 @@ function parseBaruchExcel(): BaruchData {
 
   // Try multiple paths to handle both local and production environments
   const possiblePaths = [
-    path.join(process.cwd(), config.settings.defaultExcelFile),
+    // Vercel serverless environment paths
+    path.join('/var/task', 'public', 'Baruch_Workout.xlsx'),
     path.join(process.cwd(), 'public', 'Baruch_Workout.xlsx'),
+    path.join(__dirname, '../../..', 'public', 'Baruch_Workout.xlsx'),
+    path.join(__dirname, '../../../public', 'Baruch_Workout.xlsx'),
+
+    // Fallback paths for other environments
+    path.join(process.cwd(), config.settings.defaultExcelFile),
     path.join(__dirname, '../../..', config.settings.defaultExcelFile),
     path.join(__dirname, '../../../..', config.settings.defaultExcelFile),
-    path.join(__dirname, '../../..', 'public', 'Baruch_Workout.xlsx'),
     config.settings.defaultExcelFile
   ]
 
@@ -203,9 +208,28 @@ function parseBaruchExcel(): BaruchData {
   }
 
   if (!filePath) {
+    console.error('🔍 Detailed Path Debug:')
     console.error('Tried paths:', possiblePaths)
     console.error('Current working directory:', process.cwd())
     console.error('__dirname:', __dirname)
+
+    // Check what files exist in various directories
+    try {
+      console.error('Root directory contents:', fs.readdirSync(process.cwd()))
+    } catch (e) {
+      console.error('Cannot read root directory:', e)
+    }
+
+    try {
+      const publicPath = path.join(process.cwd(), 'public')
+      console.error('Public directory exists:', fs.existsSync(publicPath))
+      if (fs.existsSync(publicPath)) {
+        console.error('Public directory contents:', fs.readdirSync(publicPath))
+      }
+    } catch (e) {
+      console.error('Cannot read public directory:', e)
+    }
+
     throw new Error(`${config.settings.defaultExcelFile} not found. Searched in multiple locations.`)
   }
 
