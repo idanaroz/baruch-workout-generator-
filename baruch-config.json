@@ -1,0 +1,110 @@
+{
+  "dailyTemplates": {
+    "sunday": {
+      "name": "Legs Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Squats",
+        "Lunges",
+        "Legs Accessories",
+        "Core"
+      ],
+      "cardio": "metcon"
+    },
+    "monday": {
+      "name": "Shoulders Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Shoulder Press",
+        "Handstand Variation",
+        "Shoulder Press Accessories",
+        "Traps/Forarms"
+      ],
+      "cardio": "metcon"
+    },
+    "tuesday": {
+      "name": "Gymnastics Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Gymnastics Benchmark 1"
+      ],
+      "cardio": "running"
+    },
+    "wednesday": {
+      "name": "Back & Pull Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Deadlifts",
+        "Back General:",
+        "Pullups:",
+        "Biceps",
+        "Core"
+      ],
+      "cardio": "metcon"
+    },
+    "thursday": {
+      "name": "Chest & Push Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Chest Main",
+        "Chest Accessories",
+        "Triceps",
+        "Core"
+      ],
+      "cardio": "mobility"
+    },
+    "friday": {
+      "name": "Rest Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [],
+      "cardio": "rest"
+    },
+    "saturday": {
+      "name": "Olympic Lifting Day",
+      "warmup": "5 Minutes Aerobic Warmup + Dynamic Mobility",
+      "categories": [
+        "Clean accessories",
+        "Weightligting Clean & Jerk",
+        "Snatch Accessories",
+        "Weightligting Snatch"
+      ],
+      "cardio": "running"
+    }
+  },
+  "settings": {
+    "defaultExcelFile": "Baruch_Workout.xlsx",
+    "allowCustomPercentages": true,
+    "showProbabilities": true,
+    "showRandomValues": true
+  },
+  "metcons": [
+    {
+      "name": "Fran",
+      "description": "21-15-9 For Time:\n• Thrusters (95/65 lbs)\n• Pull-Ups"
+    },
+    {
+      "name": "Annie",
+      "description": "50-40-30-20-10 For Time:\n• Double-Unders\n• Sit-Ups"
+    },
+    {
+      "name": "Cindy",
+      "description": "20 Min AMRAP:\n• 5 Pull-Ups\n• 10 Push-Ups\n• 15 Air Squats"
+    },
+    {
+      "name": "Helen",
+      "description": "3 Rounds For Time:\n• 400m Run\n• 21 KB Swings (53/35 lbs)\n• 12 Pull-Ups"
+    },
+    {
+      "name": "Murph",
+      "description": "For Time:\n• 1 Mile Run\n• 100 Pull-Ups\n• 200 Push-Ups\n• 300 Air Squats\n• 1 Mile Run"
+    },
+    {
+      "name": "Grace",
+      "description": "30 Clean & Jerks For Time (135/95 lbs)"
+    },
+    {
+      "name": "Isabel",
+      "description": "30 Snatches For Time (135/95 lbs)"
+    }
+  ]
+}
