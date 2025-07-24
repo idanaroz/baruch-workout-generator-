@@ -220,14 +220,31 @@ const AdminPanel: React.FC = () => {
           </div>
         </div>
 
-        {/* Message */}
+        {/* Toast Message - Fixed Position */}
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${
-            message.includes('✅')
-              ? 'bg-green-50 text-green-800 border border-green-200'
-              : 'bg-red-50 text-red-800 border border-red-200'
-          }`}>
-            {message}
+          <div className="fixed top-4 right-4 z-50 animate-in slide-in-from-top-2 duration-300">
+            <div className={`p-4 rounded-lg shadow-lg border-l-4 max-w-md ${
+              message.includes('✅')
+                ? 'bg-green-50 text-green-800 border-green-400 shadow-green-100'
+                : 'bg-red-50 text-red-800 border-red-400 shadow-red-100'
+            }`}>
+              <div className="flex items-start">
+                <div className="flex-1">
+                  <div className="text-sm font-medium">
+                    {message}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMessage('')}
+                  className="ml-3 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <span className="sr-only">Close</span>
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
