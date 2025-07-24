@@ -183,10 +183,28 @@ function getMetconsFromConfig(): Array<{name: string, description: string}> {
 // Parse Baruch Excel File (keep existing implementation)
 function parseBaruchExcel(): BaruchData {
   const config = loadConfig()
-  const filePath = path.join(process.cwd(), config.settings.defaultExcelFile)
 
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`${config.settings.defaultExcelFile} not found in project root`)
+  // Try multiple paths to handle both local and production environments
+  const possiblePaths = [
+    path.join(process.cwd(), config.settings.defaultExcelFile),
+    path.join(__dirname, '../../..', config.settings.defaultExcelFile),
+    path.join(__dirname, '../../../..', config.settings.defaultExcelFile),
+    config.settings.defaultExcelFile
+  ]
+
+  let filePath: string | null = null
+  for (const testPath of possiblePaths) {
+    if (fs.existsSync(testPath)) {
+      filePath = testPath
+      break
+    }
+  }
+
+  if (!filePath) {
+    console.error('Tried paths:', possiblePaths)
+    console.error('Current working directory:', process.cwd())
+    console.error('__dirname:', __dirname)
+    throw new Error(`${config.settings.defaultExcelFile} not found. Searched in multiple locations.`)
   }
 
   const workbook = XLSX.readFile(filePath)
