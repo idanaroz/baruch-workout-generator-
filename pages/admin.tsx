@@ -79,7 +79,7 @@ const AdminPanel: React.FC = () => {
       const data = await response.json()
 
       if (data.success) {
-        setMessage('Configuration saved successfully! ✅ Changes will take effect on next workout generation.')
+        setMessage('Configuration saved successfully! ✅ Changes are stored in memory and active immediately. Note: Changes are temporary and will reset when the server restarts.')
         setTimeout(() => setMessage(''), 5000)
       } else {
         setMessage(`Error: ${data.error}`)

@@ -1,43 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import * as fs from 'fs'
-import * as path from 'path'
-
-interface ConfigDailyTemplate {
-  name: string
-  warmup: string
-  categories: string[]
-  cardio: 'metcon' | 'running' | 'mobility' | 'rest'
-}
-
-interface BaruchConfig {
-  dailyTemplates: Record<string, ConfigDailyTemplate>
-  settings: {
-    defaultExcelFile: string
-    allowCustomPercentages: boolean
-    showProbabilities: boolean
-    showRandomValues: boolean
-  }
-  metcons: Array<{
-    name: string
-    description: string
-  }>
-}
-
-function loadConfig(): BaruchConfig {
-  const configPath = path.join(process.cwd(), 'baruch-config.json')
-
-  if (!fs.existsSync(configPath)) {
-    throw new Error('baruch-config.json not found in project root')
-  }
-
-  const configData = fs.readFileSync(configPath, 'utf8')
-  return JSON.parse(configData)
-}
-
-function saveConfig(config: BaruchConfig): void {
-  const configPath = path.join(process.cwd(), 'baruch-config.json')
-  fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8')
-}
+import { loadConfig, saveConfig, hasConfigOverride, BaruchConfig } from '../../lib/config-storage'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -72,7 +34,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
       res.status(200).json({
         success: true,
-        message: 'Configuration updated successfully'
+        message: 'Configuration saved successfully! ✅ Changes are stored in memory and will persist during your session.',
+        isTemporary: true
       })
     } else {
       res.setHeader('Allow', ['GET', 'POST'])

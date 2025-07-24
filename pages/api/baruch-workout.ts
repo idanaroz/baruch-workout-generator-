@@ -47,63 +47,8 @@ interface BaruchData {
   rawExcelData: any
 }
 
-// Add config interfaces
-interface ConfigDailyTemplate {
-  name: string
-  warmup: string
-  categories: string[]
-  cardio: 'metcon' | 'running' | 'mobility' | 'rest'
-}
-
-interface BaruchConfig {
-  dailyTemplates: Record<string, ConfigDailyTemplate>
-  settings: {
-    defaultExcelFile: string
-    allowCustomPercentages: boolean
-    showProbabilities: boolean
-    showRandomValues: boolean
-  }
-  metcons: Array<{
-    name: string
-    description: string
-  }>
-}
-
-// CrossFit MetCon Database
-const CROSSFIT_METCONS = [
-  {
-    name: "Fran",
-    description: "21-15-9 For Time:\n• Thrusters (95/65 lbs)\n• Pull-Ups"
-  },
-  {
-    name: "Annie",
-    description: "50-40-30-20-10 For Time:\n• Double-Unders\n• Sit-Ups"
-  },
-  {
-    name: "Karen",
-    description: "150 Wall Balls For Time (20/14 lbs)"
-  },
-  {
-    name: "Diane",
-    description: "21-15-9 For Time:\n• Deadlifts (225/155 lbs)\n• Handstand Push-Ups"
-  },
-  {
-    name: "Helen",
-    description: "3 Rounds For Time:\n• 400m Run\n• 21 KB Swings (53/35 lbs)\n• 12 Pull-Ups"
-  },
-  {
-    name: "Cindy",
-    description: "AMRAP 20 minutes:\n• 5 Pull-Ups\n• 10 Push-Ups\n• 15 Air Squats"
-  },
-  {
-    name: "Grace",
-    description: "30 Clean & Jerks For Time (135/95 lbs)"
-  },
-  {
-    name: "Isabel",
-    description: "30 Snatches For Time (135/95 lbs)"
-  }
-]
+// Import shared config storage
+import { loadConfig, BaruchConfig } from '../../lib/config-storage'
 
 // Daily Templates are now loaded from baruch-config.json
 
@@ -122,18 +67,6 @@ function getFreshWorkoutData(): BaruchData {
     categories: cachedBaruchData.categories, // Cached from Excel
     rawExcelData: cachedBaruchData.rawExcelData // Cached from Excel
   }
-}
-
-// Remove hardcoded DAILY_TEMPLATES and replace with config loader
-function loadConfig(): BaruchConfig {
-  const configPath = path.join(process.cwd(), 'baruch-config.json')
-
-  if (!fs.existsSync(configPath)) {
-    throw new Error('baruch-config.json not found in project root. Please create it first.')
-  }
-
-  const configData = fs.readFileSync(configPath, 'utf8')
-  return JSON.parse(configData)
 }
 
 // Convert config format to internal format
